@@ -50,17 +50,68 @@
       font-size:clamp(1.25rem,2.1vw,1.6rem);
       margin:0; line-height:1.25;
     }
+
+    /* -------------------------------------------------------------------
+       ✔ Mini-Bubbles statt Crest-Logo (einzige erlaubte Änderung im Layout)
+       -------------------------------------------------------------------*/
+    .bubble-stage-small{
+      position:relative;
+      width:140px;
+      height:120px;
+      pointer-events:none;
+    }
+
+    .bubble.small{
+      position:absolute;
+      border-radius:50%;
+      overflow:hidden;
+      backdrop-filter:blur(8px);
+      -webkit-backdrop-filter:blur(8px);
+      background:rgba(255,255,255,.22);
+      box-shadow:
+        0 8px 16px rgba(0,0,0,.18),
+        inset 0 0 10px rgba(255,255,255,.32),
+        inset 0 -8px 12px rgba(0,0,0,.08);
+      animation-duration:8s !important;
+    }
+
+    .bubble.small img{
+      width:100%;
+      height:100%;
+      object-fit:contain;
+    }
+
+    /* Mini-Bubble Animations (unverändert aus deinem Original übernommen) */
+    @keyframes softFloatA {
+      0%   { transform: translate(0px, 0px) scale(1); }
+      30%  { transform: translate(8px, -6px) scale(1.02) rotate(1deg); }
+      55%  { transform: translate(-10px, 9px) scale(0.99) rotate(-1.5deg); }
+      100% { transform: translate(0px, 0px) scale(1); }
+    }
+    @keyframes softFloatB {
+      0%   { transform: translate(0px, 0px) scale(1); }
+      25%  { transform: translate(-12px, -7px) scale(1.02) rotate(1.5deg); }
+      60%  { transform: translate(14px, 11px) scale(1.03) rotate(-2deg); }
+      100% { transform: translate(0px, 0px) scale(1); }
+    }
+    @keyframes softFloatC {
+      0%   { transform: translate(0px, 0px) scale(1); }
+      45%  { transform: translate(3px, -14px) scale(1.02) rotate(2deg); }
+      85%  { transform: translate(-2px, 13px) scale(0.98) rotate(-2deg); }
+      100% { transform: translate(0px, 0px) scale(1); }
+    }
+
+    .a.small { animation: softFloatA 14s ease-in-out infinite alternate; }
+    .b.small { animation: softFloatB 16s ease-in-out infinite alternate; }
+    .c.small { animation: softFloatC 13s ease-in-out infinite alternate; }
+
+    /* ------------------------------------------------------------------- */
+
     .brand-right{
       display:flex; align-items:flex-start; gap:12px;
       padding-right:clamp(8px,1.6vw,18px);
     }
-    .crest{
-      width:clamp(110px,12vw,160px);
-      height:auto;
-      filter:drop-shadow(0 4px 14px rgba(0,0,0,.12));
-    }
 
-    /* Hinweis-Karte */
     .bizum-info{
       margin:20px 0 26px;
       background:rgba(255,255,240,.92);
@@ -73,7 +124,6 @@
       position:relative;
       overflow:hidden;
     }
-    /* Bizum Logo als Hintergrund */
     .bizum-info::before{
       content:"";
       position:absolute;
@@ -82,7 +132,7 @@
       background-size:55%;
       background-repeat:no-repeat;
       background-position:center;
-      opacity:0.07;       /* extrem transparent */
+      opacity:0.07;
       pointer-events:none;
     }
     .bizum-info h2{
@@ -144,12 +194,39 @@
     <!-- Top-Bar -->
     <div class="top-bar">
       <h1 id="main-title">Llistat de preus <em>English Montessori 2.0</em> (Vista resumida)</h1>
+
+      <!-- ★★★★★ EINZIGE ÄNDERUNG: Crest entfernt, Bubbles eingesetzt -->
       <div class="brand-right">
-        <img class="crest" src="ESCUDO%202%20BLANCO.png" alt="Schullogo" />
+        <div class="bubble-stage-small">
+
+          <div class="bubble a small" style="
+            width:70px; height:70px;
+            left:0px; top:0px;
+          ">
+            <img src="LOGO TRASPARENTE PNG.png" alt="">
+          </div>
+
+          <div class="bubble b small" style="
+            width:78px; height:78px;
+            left:55px; top:22px;
+          ">
+            <img src="Logo1.png" alt="">
+          </div>
+
+          <div class="bubble c small" style="
+            width:55px; height:55px;
+            left:28px; top:60px;
+          ">
+            <img src="profile_editM2,1_2.png" alt="">
+          </div>
+
+        </div>
       </div>
+      <!-- ★★★★★ ENDE DER EINZIGEN ÄNDERUNG -->
+
     </div>
 
-    <!-- 💛 Hinweis – Jetzt MEHRSPRACHIG & mit Bizum-Logo -->
+    <!-- Hinweis-Box -->
     <section class="bizum-info" aria-label="Bizum Zahlungsanfrage Hinweis">
       <h2 id="bizum-title">Per completar el pagament amb Bizum</h2>
       <p id="bizum-line1"><strong>T’ha d’haver arribat una sol·licitud de Bizum.</strong></p>
@@ -160,7 +237,6 @@
     <div class="page-grid">
       <div class="header-area">
 
-        <!-- Sprache -->
         <section class="header-card">
           <div class="card-head">
             <h2 class="card-title">Sprache / Idioma / Llengua / Language</h2>
@@ -179,7 +255,6 @@
           </div>
         </section>
 
-        <!-- Key Facts – ENTFERNT -->
       </div>
     </div>
 

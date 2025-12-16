@@ -1,231 +1,335 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Bizum & PayPal – Zahlungsinfo</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Bizum & PayPal – Zahlungsinfo</title>
 
-  <style>
-    :root{
-      --border:#d0d7de; --text:#24292f;
-      --ease-soft:cubic-bezier(.22,.61,.36,1);
-      --container-max:1200px; --page-pad:clamp(16px,3vw,28px);
-    }
+<style>
+/* ───────────────────── ROOT ───────────────────── */
+:root{
+  --text:#24292f;
+  --border:#d0d7de;
+  --wa-green:#25D366;
+  --wa-green-d:#1ebe5d;
+}
 
-    html{
-      min-height:100%;
-      background-image:
-        linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,.06) 40%, rgba(255,255,255,.12) 100%),
-        url("banner%20sin%20nada%20png.png");
-      background-size:cover;
-      background-attachment:fixed;
-    }
+/* ───────────────────── BACKGROUND ───────────────────── */
+html{
+  min-height:100%;
+  background-image:
+    linear-gradient(to right,
+      rgba(255,255,255,0) 0%,
+      rgba(255,255,255,.06) 40%,
+      rgba(255,255,255,.12) 100%
+    ),
+    url("banner%20sin%20nada%20png.png");
+  background-size:cover;
+  background-position:center;
+  background-attachment:fixed;
+}
 
-    body{
-      margin:0;
-      font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
-      color:var(--text);
-      background:transparent;
-    }
+body{
+  margin:0;
+  font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;
+  color:var(--text);
+}
 
-    /* ─────────── Sprachleiste ─────────── */
-    .lang-bar{
-      position:sticky;
-      top:0;
-      z-index:50;
-      display:flex;
-      justify-content:flex-end;
-      padding:6px 18px;
-      background:rgba(255,255,255,.85);
-      backdrop-filter:blur(6px);
-      border-bottom:1px solid #e5e7eb;
-    }
+/* ───────────────────── LANGUAGE BAR ───────────────────── */
+.lang-bar{
+  position:sticky;
+  top:0;
+  z-index:50;
+  display:flex;
+  justify-content:flex-end;
+  padding:6px 18px;
+  background:rgba(255,255,255,.85);
+  backdrop-filter:blur(6px);
+  border-bottom:1px solid #e5e7eb;
+}
 
-    .lang-bar select{
-      padding:4px 10px;
-      font-size:.9rem;
-      border-radius:999px;
-      border:1px solid #cfd6dd;
-      background:#fff;
-    }
+.lang-bar select{
+  padding:4px 10px;
+  font-size:.9rem;
+  border-radius:999px;
+  border:1px solid #cfd6dd;
+}
 
-    .container{
-      max-width:var(--container-max);
-      margin:0 auto;
-      padding:var(--page-pad);
-    }
+/* ───────────────────── LAYOUT ───────────────────── */
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:clamp(16px,3vw,28px);
+}
 
-    /* ─────────── Top Bar ─────────── */
-    .top-bar{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:16px;
-      margin-bottom:14px;
-    }
+/* ───────────────────── TOP BAR ───────────────────── */
+.top-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:16px;
+}
 
-    h1{
-      font-size:clamp(1.2rem,2vw,1.55rem);
-      margin:0;
-      line-height:1.3;
-    }
+h1{
+  font-size:clamp(1.3rem,2.3vw,1.7rem);
+  margin:0;
+}
 
-    /* ─────────── Bubbles ─────────── */
-    .bubble-stage-small{
-      position:relative;
-      width:140px;
-      height:120px;
-      pointer-events:none;
-      flex-shrink:0;
-    }
+/* ───────────────────── BUBBLES ───────────────────── */
+.bubble-stage{
+  position:relative;
+  width:140px;
+  height:120px;
+  pointer-events:none;
+}
 
-    .bubble.small{
-      position:absolute;
-      border-radius:50%;
-      backdrop-filter:blur(8px);
-      background:rgba(255,255,255,.22);
-      box-shadow:
-        0 8px 16px rgba(0,0,0,.18),
-        inset 0 0 10px rgba(255,255,255,.32),
-        inset 0 -8px 12px rgba(0,0,0,.08);
-    }
+.bubble{
+  position:absolute;
+  border-radius:50%;
+  backdrop-filter:blur(8px);
+  background:rgba(255,255,255,.22);
+  box-shadow:
+    0 8px 16px rgba(0,0,0,.18),
+    inset 0 0 10px rgba(255,255,255,.32),
+    inset 0 -8px 12px rgba(0,0,0,.08);
+  animation:softFloat 16s ease-in-out infinite;
+}
 
-    .bubble.small img{
-      width:100%;
-      height:100%;
-      object-fit:contain;
-    }
+.bubble img{
+  width:100%;
+  height:100%;
+  object-fit:contain;
+}
 
-    @keyframes softFloat {
-      0%{ transform:translate(0,0) }
-      50%{ transform:translate(8px,-6px) }
-      100%{ transform:translate(0,0) }
-    }
+.b1{width:70px;height:70px;left:0;top:0;animation-duration:14s;}
+.b2{width:78px;height:78px;left:55px;top:22px;animation-duration:18s;}
+.b3{width:55px;height:55px;left:28px;top:60px;animation-duration:16s;}
 
-    .a.small{ animation:softFloat 14s ease-in-out infinite }
-    .b.small{ animation:softFloat 18s ease-in-out infinite reverse }
-    .c.small{ animation:softFloat 16s ease-in-out infinite }
+@keyframes softFloat{
+  0%{transform:translate(0,0)}
+  50%{transform:translate(8px,-6px)}
+  100%{transform:translate(0,0)}
+}
 
-    /* ─────────── Hinweisboxen ─────────── */
-    .notice-grid{
-      display:grid;
-      grid-template-columns:1fr;
-      gap:18px;
-      margin-top:20px;
-    }
+/* ───────────────────── NOTICE BOXES ───────────────────── */
+.notice-grid{
+  display:grid;
+  gap:18px;
+  margin-top:22px;
+}
 
-    @media(min-width:900px){
-      .notice-grid{
-        grid-template-columns:1fr 1fr;
-      }
-    }
+@media(min-width:900px){
+  .notice-grid{grid-template-columns:1fr 1fr}
+}
 
-    .notice{
-      position:relative;
-      background:rgba(255,255,240,.94);
-      border:1px solid #e2d78f;
-      border-left:5px solid #d7c44b;
-      border-radius:14px;
-      padding:22px;
-      box-shadow:0 6px 22px rgba(0,0,0,.08);
-      overflow:hidden;
-      transition:transform .45s var(--ease-soft), box-shadow .45s var(--ease-soft);
-    }
+.notice{
+  position:relative;
+  background:rgba(255,255,240,.94);
+  border:1px solid #e2d78f;
+  border-left:5px solid #d7c44b;
+  padding:22px;
+  border-radius:14px;
+  box-shadow:0 6px 22px rgba(0,0,0,.08);
+  overflow:hidden;
+  transition:.4s ease;
+}
 
-    .notice:hover{
-      transform:translateY(-4px);
-      box-shadow:0 10px 30px rgba(0,0,0,.12);
-    }
+.notice:hover{
+  transform:translateY(-4px);
+}
 
-    .notice::after{
-      content:"";
-      position:absolute;
-      inset:0;
-      background-repeat:no-repeat;
-      background-position:90% 70%;
-      background-size:120px;
-      opacity:.08;
-      pointer-events:none;
-    }
+.notice h2{
+  margin:0 0 10px;
+  font-size:1.1rem;
+}
 
-    .notice.bizum::after{ background-image:url("bizum-placeholder.png"); }
-    .notice.paypal::after{ background-image:url("paypal-placeholder.png"); }
+.notice p{
+  margin:6px 0;
+  line-height:1.45;
+  max-width:75%;
+}
 
-    .notice h2{
-      margin:0 0 10px;
-      font-size:1.05rem;
-      font-weight:700;
-    }
+/* Motive */
+.notice img.motif{
+  position:absolute;
+  right:16px;
+  top:50%;
+  transform:translateY(-50%);
+  max-height:70%;
+  width:auto;
+  max-width:35%;
+  object-fit:contain;
+  opacity:.14;
+  pointer-events:none;
+}
 
-    .notice p{
-      margin:6px 0;
-      line-height:1.45;
-      font-size:.98rem;
-    }
+@media(max-width:640px){
+  .notice p{max-width:100%}
+  .notice img.motif{
+    position:static;
+    transform:none;
+    display:block;
+    margin:12px auto 0;
+    max-height:120px;
+  }
+}
 
-    /* ─────────── Smartphone Optimierung ─────────── */
-    @media (max-width:720px){
-      .top-bar{
-        flex-direction:column;
-        align-items:center;
-        text-align:center;
-        gap:12px;
-      }
+/* ───────────────────── WHATSAPP FLOATING ───────────────────── */
+.wa-fab{
+  position:fixed;
+  right:clamp(12px,2vw,18px);
+  bottom:clamp(12px,2vw,18px);
+  z-index:900;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  padding:10px 12px;
+  background:linear-gradient(180deg,var(--wa-green),var(--wa-green-d));
+  color:#fff;
+  border-radius:999px;
+  box-shadow:0 10px 24px rgba(0,0,0,.18);
+  text-decoration:none;
+  font-weight:700;
+}
 
-      h1{
-        font-size:1.25rem;
-      }
+.wa-circle{
+  width:28px;
+  height:28px;
+  border-radius:50%;
+  background:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
 
-      .bubble-stage-small{
-        transform:scale(.9);
-      }
-    }
-  </style>
+.wa-circle img{
+  width:26px;
+  height:26px;
+  object-fit:contain;
+}
+
+.wa-label{display:none;}
+
+@media(max-width:768px){
+  .wa-label{display:inline;}
+}
+</style>
 </head>
 
 <body>
 
+<!-- Language bar -->
 <div class="lang-bar">
-  <select>
-    <option>Català</option>
-    <option>Español</option>
-    <option>English</option>
-    <option selected>Deutsch</option>
+  <select id="langSel">
+    <option value="ca">Català</option>
+    <option value="es">Español</option>
+    <option value="en">English</option>
+    <option value="de" selected>Deutsch</option>
   </select>
 </div>
 
 <div class="container">
 
   <div class="top-bar">
-    <h1>So kannst du die eine Zahlung für diesen Monat unkompliziert abschließen. 🙂</h1>
+    <h1 id="headline"></h1>
 
-    <div class="bubble-stage-small">
-      <div class="bubble a small" style="width:70px;height:70px;left:0;top:0">
-        <img src="LOGO TRASPARENTE PNG.png">
-      </div>
-      <div class="bubble b small" style="width:78px;height:78px;left:55px;top:22px">
-        <img src="Logo1.png">
-      </div>
-      <div class="bubble c small" style="width:55px;height:55px;left:28px;top:60px">
-        <img src="profile_editM2,1_2.png">
-      </div>
+    <div class="bubble-stage">
+      <div class="bubble b1"><img src="LOGO TRASPARENTE PNG_center.png"></div>
+      <div class="bubble b2"><img src="Logo1.png"></div>
+      <div class="bubble b3"><img src="profile_editM2,1_2.png"></div>
     </div>
   </div>
 
   <div class="notice-grid">
-    <section class="notice bizum">
-      <h2>Zahlung per Bizum</h2>
-      <p>Öffne deine Bank-App und gehe zum Bereich Bizum.</p>
-      <p>Dort findest du meine ausstehende Zahlungsanfrage.</p>
-      <p><strong>Bitte sende kein eigenes Bizum</strong> – durch das Annehmen meiner Anfrage erleichterst du mir die Verwaltung erheblich. Danke! 🙏</p>
+
+    <section class="notice">
+      <h2 id="bizumTitle"></h2>
+      <p id="bizumText"></p>
+      <img class="motif" src="LogoBizum.png" alt="Bizum">
     </section>
 
-    <section class="notice paypal">
-      <h2>Zahlung per PayPal</h2>
-      <p>Wenn du mit PayPal zahlst, findest du ebenfalls eine offene Anfrage direkt in deiner PayPal-App bzw. in deinem Konto.</p>
+    <section class="notice">
+      <h2 id="paypalTitle"></h2>
+      <p id="paypalText"></p>
+      <img class="motif" src="LogoPayPal.png" alt="PayPal">
     </section>
+
   </div>
-
 </div>
+
+<!-- WhatsApp Floating -->
+<a id="waBtn" class="wa-fab" target="_blank" aria-label="WhatsApp">
+  <span class="wa-circle">
+    <img src="Whatsapp_Button.png" alt="WhatsApp">
+  </span>
+  <span id="waLabel" class="wa-label"></span>
+</a>
+
+<script>
+const i18n={
+  de:{
+    h:"So kannst du die Zahlung für diesen Monat unkompliziert abschließen 🙂",
+    bT:"Zahlung per Bizum",
+    bP:`Öffne deine Bank-App und gehe zum Bereich Bizum.<br><br>
+        Dort findest du meine ausstehende Zahlungsanfrage.<br><br>
+        <strong>Bitte sende kein eigenes Bizum</strong> – durch das Annehmen meiner Anfrage erleichterst du mir die Verwaltung erheblich. Danke! 🙏`,
+    pT:"Zahlung per PayPal",
+    pP:"In deinem PayPal-Konto findest du ebenfalls eine offene Zahlungsanfrage.",
+    wa:"Hallo! Ich habe eine Frage zur Zahlung.",
+    waL:"WhatsApp"
+  },
+  es:{
+    h:"Así puedes completar el pago de este mes fácilmente 🙂",
+    bT:"Pago por Bizum",
+    bP:`Abre tu app bancaria y entra en Bizum.<br><br>
+        Allí encontrarás mi solicitud pendiente.<br><br>
+        <strong>Por favor, no envíes un Bizum propio</strong>. ¡Gracias! 🙏`,
+    pT:"Pago por PayPal",
+    pP:"En tu cuenta de PayPal encontrarás una solicitud de pago.",
+    wa:"Hola, tengo una pregunta sobre el pago.",
+    waL:"WhatsApp"
+  },
+  ca:{
+    h:"Així pots completar el pagament d’aquest mes fàcilment 🙂",
+    bT:"Pagament amb Bizum",
+    bP:`Obre l’app del banc i ves a Bizum.<br><br>
+        Hi trobaràs la meva sol·licitud pendent.<br><br>
+        <strong>Si us plau, no enviïs un Bizum propi</strong>. Gràcies! 🙏`,
+    pT:"Pagament amb PayPal",
+    pP:"Al teu compte de PayPal trobaràs una sol·licitud de pagament.",
+    wa:"Hola! Tinc una pregunta sobre el pagament.",
+    waL:"WhatsApp"
+  },
+  en:{
+    h:"Here’s how to complete this month’s payment easily 🙂",
+    bT:"Payment via Bizum",
+    bP:`Open your banking app and go to Bizum.<br><br>
+        You will find my pending request there.<br><br>
+        <strong>Please do not send your own Bizum</strong>. Thank you! 🙏`,
+    pT:"Payment via PayPal",
+    pP:"You will also find an open payment request in your PayPal account.",
+    wa:"Hi! I have a question about the payment.",
+    waL:"WhatsApp"
+  }
+};
+
+const phone="34662222407";
+
+function applyLang(l){
+  const d=i18n[l];
+  headline.innerHTML=d.h;
+  bizumTitle.innerHTML=d.bT;
+  bizumText.innerHTML=d.bP;
+  paypalTitle.innerHTML=d.pT;
+  paypalText.innerHTML=d.pP;
+  waLabel.innerText=d.waL;
+  waBtn.href=`https://wa.me/${phone}?text=${encodeURIComponent(d.wa)}`;
+}
+
+const sel=document.getElementById("langSel");
+sel.addEventListener("change",()=>applyLang(sel.value));
+applyLang(sel.value);
+</script>
+
 </body>
 </html>

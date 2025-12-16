@@ -68,6 +68,7 @@ html, body{
   justify-content:space-between;
   align-items:center;
   gap:16px;
+  position:relative;
 }
 
 h1{
@@ -213,6 +214,21 @@ h1{
 @media(max-width:768px){
   .wa-label{display:inline;}
 }
+
+/* ───────────────────── MOBILE BUBBLES RIGHT ───────────────────── */
+@media(max-width:640px){
+  .top-bar{
+    justify-content:space-between;
+  }
+  .bubble-stage{
+    position:absolute;
+    top:0;
+    right:0;
+    transform:translateY(50%);
+    width:100px;
+    height:100px;
+  }
+}
 </style>
 </head>
 
@@ -221,10 +237,10 @@ h1{
 <!-- Language bar -->
 <div class="lang-bar">
   <select id="langSel">
-    <option value="ca">Català</option>
+    <option value="ca" selected>Català</option>
     <option value="es">Español</option>
     <option value="en">English</option>
-    <option value="de" selected>Deutsch</option>
+    <option value="de">Deutsch</option>
   </select>
 </div>
 

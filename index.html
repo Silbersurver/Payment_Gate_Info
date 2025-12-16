@@ -222,20 +222,20 @@ h1{
   }
   .bubble-stage{
     position:relative;
-    width:100px;
-    height:100px;
+    width:60px; /* enge vertikale Anordnung */
+    height:auto;
     display:flex;
+    flex-direction:column;
     align-items:center;
-    justify-content:flex-end;
-    gap:-15px; /* Bubbles überlappen leicht */
+    justify-content:center;
+    gap:12px;
     margin-left:auto;
+    margin-right:auto;
   }
   .b1,.b2,.b3{
     position:relative;
-    width:auto;
-    height:auto;
-    min-width:50px;
-    min-height:50px;
+    width:60px;
+    height:60px;
   }
   .b1 img,.b2 img,.b3 img{
     width:100%;

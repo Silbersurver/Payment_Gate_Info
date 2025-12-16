@@ -6,7 +6,6 @@
 <title>Bizum & PayPal – Zahlungsinfo</title>
 
 <style>
-/* ───────────────────── ROOT ───────────────────── */
 :root{
   --text:#24292f;
   --border:#d0d7de;
@@ -14,7 +13,6 @@
   --wa-green-d:#1ebe5d;
 }
 
-/* ───────────────────── BACKGROUND ───────────────────── */
 html, body{
   margin:0;
   padding:0;
@@ -34,7 +32,6 @@ html, body{
   background-attachment:fixed;
 }
 
-/* ───────────────────── LANGUAGE BAR ───────────────────── */
 .lang-bar{
   position:sticky;
   top:0;
@@ -54,14 +51,12 @@ html, body{
   border:1px solid #cfd6dd;
 }
 
-/* ───────────────────── LAYOUT ───────────────────── */
 .container{
   max-width:1200px;
   margin:0 auto;
   padding:clamp(16px,3vw,28px);
 }
 
-/* ───────────────────── TOP BAR ───────────────────── */
 .top-bar{
   display:flex;
   flex-wrap:wrap;
@@ -112,7 +107,6 @@ h1{
   100%{transform:translate(0,0)}
 }
 
-/* ───────────────────── NOTICE BOXES ───────────────────── */
 .notice-grid{
   display:grid;
   gap:18px;
@@ -150,7 +144,6 @@ h1{
   max-width:75%;
 }
 
-/* Motive */
 .notice img.motif{
   position:absolute;
   right:16px;
@@ -175,7 +168,6 @@ h1{
   }
 }
 
-/* ───────────────────── WHATSAPP FLOATING ───────────────────── */
 .wa-fab{
   position:fixed;
   right:clamp(12px,2vw,18px);
@@ -215,7 +207,6 @@ h1{
   .wa-label{display:inline;}
 }
 
-/* ───────────────────── MOBILE BUBBLES RIGHT ───────────────────── */
 @media(max-width:640px){
   .top-bar{
     justify-content:space-between;
@@ -234,7 +225,6 @@ h1{
 
 <body>
 
-<!-- Language bar -->
 <div class="lang-bar">
   <select id="langSel">
     <option value="ca" selected>Català</option>
@@ -245,7 +235,6 @@ h1{
 </div>
 
 <div class="container">
-
   <div class="top-bar">
     <h1 id="headline"></h1>
 
@@ -257,7 +246,6 @@ h1{
   </div>
 
   <div class="notice-grid">
-
     <section class="notice">
       <h2 id="bizumTitle"></h2>
       <p id="bizumText"></p>
@@ -269,11 +257,9 @@ h1{
       <p id="paypalText"></p>
       <img class="motif" src="LogoPayPal.png" alt="PayPal">
     </section>
-
   </div>
 </div>
 
-<!-- WhatsApp Floating -->
 <a id="waBtn" class="wa-fab" target="_blank" aria-label="WhatsApp">
   <span class="wa-circle">
     <img src="Whatsapp_Button.png" alt="WhatsApp">

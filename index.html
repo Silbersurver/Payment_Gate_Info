@@ -246,7 +246,7 @@ h1{
   }
 }
 
-/* ───────────────────── MOBILE BUBBLES PORTRAIT (leicht nach links) ───────────────────── */
+/* ───────────────────── MOBILE BUBBLES PORTRAIT ───────────────────── */
 @media(max-width:640px) and (orientation: portrait){
   .top-bar{
     justify-content:space-between;
@@ -262,9 +262,9 @@ h1{
     height:120px; 
     display:flex;
     flex-direction:column;
-    justify-content:space-between; /* gleichmäßige Abstände */
-    align-items:flex-end; /* rechtsbündig */
-    margin-right:70px; /* leicht nach links verschoben */
+    justify-content:space-between;
+    align-items:flex-end;
+    margin-right:70px;
   }
   .b1{width:70px; height:70px;} 
   .b2{width:78px; height:78px;}
@@ -272,6 +272,13 @@ h1{
   .b1 img,.b2 img,.b3 img{
     width:100%;
     height:100%;
+  }
+}
+
+/* ───────────────────── WHATSAPP FIX: MOBILE PORTRAIT ───────────────────── */
+@media (max-width: 640px) and (orientation: portrait) {
+  .wa-fab{
+    bottom: 90px;
   }
 }
 </style>
@@ -339,33 +346,33 @@ const i18n={
     bT:"Pago por Bizum",
     bP:`Abre tu app bancaria y ve a la sección Bizum.<br><br>
         Allí encontrarás mi solicitud de pago pendiente.<br><br>
-        <strong>Por favor, no envíes un Bizum por tu cuenta.</strong> – al aceptar mi solicitud me facilitas mucho la contabilidad. ¡Gracias! 🙏`,
+        <strong>Por favor, no envíes un Bizum por tu cuenta</strong> – al aceptar mi solicitud me facilitas mucho la contabilidad. ¡Gracias! 🙏`,
     pT:"Pago por PayPal",
     pP:"Si pagas con PayPal, también encontrarás una solicitud pendiente directamente en tu app de PayPal o en tu cuenta de PayPal. Gracias por tu ayuda con el proceso.",
     wa:"¡Hola! Tengo una pregunta sobre el pago,...",
-    waL:"¿Tienes más preguntas? Contáctanos por WhatsApp"
+    waL:"¿Preguntas? Contáctanos por WhatsApp"
   },
   ca:{
     h:"Així pots completar el teu pagament de manera senzilla 🙂",
     bT:"Pagament amb Bizum",
     bP:`Obre la teva app bancària i ves a l’apartat Bizum.<br><br>
         Allà trobaràs la meva sol·licitud de pagament pendent.<br><br>
-        <strong>Si us plau, no enviïs un Bizum pel teu compte</strong>. – acceptant la meva sol·licitud em facilites molt la comptabilitat. Gràcies! 🙏`,
+        <strong>Si us plau, no enviïs un Bizum pel teu compte</strong> – acceptant la meva sol·licitud em facilites molt la comptabilitat. Gràcies! 🙏`,
     pT:"Pagament amb PayPal",
     pP:"Si pagues amb PayPal, també trobaràs una sol·licitud pendent directament a la teva app de PayPal o al teu compte de PayPal. Gràcies per la teva ajuda amb la gestió.",
     wa:"Hola! Tinc una pregunta sobre el pagament,...",
-    waL:"Tens més preguntes? Contacta’ns per WhatsApp"
+    waL:"Preguntes? Contacta’ns per WhatsApp"
   },
   en:{
-    h:"Here’s how to complete this month’s payment easily 🙂",
+    h:"Here’s how you can easily complete your payment 🙂",
     bT:"Payment via Bizum",
-    bP:`Open your banking app and go to Bizum.<br><br>
-        You will find my pending request there.<br><br>
-        <strong>Please do not send your own Bizum</strong>. Thank you! 🙏`,
+    bP:`Open your banking app and go to your Bizum section.<br><br>
+        There you will find my pending payment request.<br><br>
+        <strong>Please do not send a separate Bizum</strong> – accepting my request helps me a lot with accounting. Thank you! 🙏`,
     pT:"Payment via PayPal",
-    pP:"You will also find an open payment request in your PayPal account.",
-    wa:"Hi! I have a question about the payment.",
-    waL:"WhatsApp"
+    pP:"If you pay with PayPal, you will also find a pending request directly in your PayPal app or in your PayPal account. Thank you for your help with the process.",
+    wa:"Hi! I have a question about the payment,...",
+    waL:"Any questions? Contact us via WhatsApp"
   }
 };
 
